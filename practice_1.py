@@ -99,3 +99,70 @@ personal_car = Car("Audi 05", 240, 18)
 
 print(f"Color:", bus_3.color, "Vehicle name:", bus_3.name, "Speed:", bus_3.max_speed, "Mileage:", bus_3.mileage)
 print(f"Color:", personal_car.color, "Vehicle name:", personal_car.name, "Speed:", personal_car.max_speed, "Mileage:", personal_car.mileage)
+
+
+# OOP Exercise 6: Class Inheritance
+# Given:
+
+# Create a Bus child class that inherits from the Vehicle class. The default fare charge of any vehicle is seating capacity * 100. 
+# If Vehicle is Bus instance, we need to add an extra 10% on full fare as a maintenance charge. 
+# So total fare for bus instance will become the final amount = total fare + 10% of the total fare.
+
+# Note: The bus seating capacity is 50. so the final fare amount should be 5500. You need to override the fare() method of a Vehicle class in Bus class.
+
+# Use the following code for your parent Vehicle class. We need to access the parent class from inside a method of a child class.
+
+class Vehicle:
+    def __init__(self, name, mileage, capacity):
+        self.name = name
+        self.mileage = mileage
+        self.capacity = capacity
+        
+    def fare(self):
+        return self.capacity * 100
+
+class Bus(Vehicle):
+
+    def fare(self):
+        amount = super().fare()
+        amount += amount * 10 / 100
+        return amount
+
+        # fare = self.capacity * 100  ## my version
+        # return fare + (fare * .1)
+
+School_bus = Bus("School Volvo", 12, 50)
+print(f"Total fare is: ", School_bus.fare())
+
+
+# OOP Exercise 7: Check type of an object
+# Write a program to determine which class a given Bus object belongs to.
+
+# Given:
+
+class Vehicle:
+    def __init__(self, name, mileage, capacity):
+        self.name = name
+        self.mileage = mileage
+        self.capacity = capacity
+        
+class Bus(Vehicle):
+       pass
+School_bus = Bus("School Volvo", 12, 50)
+print(type(School_bus))
+
+
+# OOP Exercise 8: Determine if School_bus is also an instance of the Vehicle class
+# Given:
+
+class Vehicle:
+    def __init__(self, name, mileage, capacity):
+        self.name = name
+        self.mileage = mileage
+        self.capacity = capacity
+
+class Bus(Vehicle):
+    pass
+
+School_bus = Bus("Volvo School", 12, 50)
+print(isinstance(School_bus, Vehicle))
